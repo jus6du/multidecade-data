@@ -401,6 +401,7 @@ def create_daily_data(
         else:
             days += 365
     for i in place:
+       
         artificial_daily[i] = np.zeros(days)
         for j in range(days):
             k = (j + first_day) % 7
@@ -493,3 +494,9 @@ def plot_scatter_artificial(artificial, real, place, frequency=["1H", "1D"]):
                 artificial[x].resample(f).mean().max(),
             )
     plt.show()
+
+def format_input_wavelet(filename):
+    data = pd.read_csv(filename)
+    data.drop(columns=['Unnamed: 0'], inplace = True)
+    data.to_excel(filename.split('.')[0]+'.xlsx', index =False)
+    return
